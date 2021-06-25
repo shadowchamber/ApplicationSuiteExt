@@ -3,7 +3,7 @@
 	<AppliedUpdates xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
 	<Customization>Allow</Customization>
 	<Description>ApplicationSuite Extendable</Description>
-	<DisplayName>ApplicationSuiteExt</DisplayName>
+	<DisplayName>Application Suite Ext</DisplayName>
 	<Id>895973061</Id>
 	<InternalsVisibleTo xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
 	<Layer>8</Layer>
