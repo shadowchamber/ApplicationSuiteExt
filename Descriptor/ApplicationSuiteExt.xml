@@ -25,6 +25,7 @@
 		<d2p1:string>PersonnelCore</d2p1:string>
 		<d2p1:string>PersonnelManagement</d2p1:string>
 		<d2p1:string>SourceDocumentationTypes</d2p1:string>
+		<d2p1:string>Subledger</d2p1:string>
 		<d2p1:string>Tax</d2p1:string>
 	</ModuleReferences>
 	<Name>ApplicationSuiteExt</Name>
