@@ -47,6 +47,66 @@
       <Name>BankPaymCancelExt_Extension</Name>
       <Link>Classes\BankPaymCancelExt_Extension</Link>
     </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostCust_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostCust_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostCust_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostJournal_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostJournal_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostJournal_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostSpec_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostSpec_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostSpec_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostVend_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostVend_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostVend_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPost_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPost_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPost_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustment_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustment_WExt</Name>
+      <Link>Classes\CustVendExchAdjustment_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendInstrumentationConstantsExt">
+      <SubType>Content</SubType>
+      <Name>CustVendInstrumentationConstantsExt</Name>
+      <Link>Classes\CustVendInstrumentationConstantsExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendInstrumentationFormatterExt">
+      <SubType>Content</SubType>
+      <Name>CustVendInstrumentationFormatterExt</Name>
+      <Link>Classes\CustVendInstrumentationFormatterExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>CustVendReversePostingExt</Name>
+      <Link>Classes\CustVendReversePostingExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendSettlementInterfaceExt_Extension">
+      <SubType>Content</SubType>
+      <Name>CustVendSettlementInterfaceExt_Extension</Name>
+      <Link>Classes\CustVendSettlementInterfaceExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\CustVendTransReversePostingSelectedDateFeature_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendTransReversePostingSelectedDateFeature_WExt</Name>
+      <Link>Classes\CustVendTransReversePostingSelectedDateFeature_WExt</Link>
+    </Content>
+    <Content Include="AxClass\FeatureExt">
+      <SubType>Content</SubType>
+      <Name>FeatureExt</Name>
+      <Link>Classes\FeatureExt</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />
