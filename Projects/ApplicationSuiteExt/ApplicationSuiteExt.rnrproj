@@ -47,6 +47,11 @@
       <Name>BankPaymCancelExt_Extension</Name>
       <Link>Classes\BankPaymCancelExt_Extension</Link>
     </Content>
+    <Content Include="AxClass\CustReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>CustReversePostingExt</Name>
+      <Link>Classes\CustReversePostingExt</Link>
+    </Content>
     <Content Include="AxClass\CustVendExchAdjustmentPostCust_WExt">
       <SubType>Content</SubType>
       <Name>CustVendExchAdjustmentPostCust_WExt</Name>
@@ -102,10 +107,30 @@
       <Name>CustVendTransReversePostingSelectedDateFeature_WExt</Name>
       <Link>Classes\CustVendTransReversePostingSelectedDateFeature_WExt</Link>
     </Content>
+    <Content Include="AxClass\CustVendTransSettlement_INTaxExt_Extension">
+      <SubType>Content</SubType>
+      <Name>CustVendTransSettlement_INTaxExt_Extension</Name>
+      <Link>Classes\CustVendTransSettlement_INTaxExt_Extension</Link>
+    </Content>
     <Content Include="AxClass\FeatureExt">
       <SubType>Content</SubType>
       <Name>FeatureExt</Name>
       <Link>Classes\FeatureExt</Link>
+    </Content>
+    <Content Include="AxClass\TaxWithholdCustVendSettlementHelper_INExt">
+      <SubType>Content</SubType>
+      <Name>TaxWithholdCustVendSettlementHelper_INExt</Name>
+      <Link>Classes\TaxWithholdCustVendSettlementHelper_INExt</Link>
+    </Content>
+    <Content Include="AxClass\TransactionReversalExecutionDetailExt_Extension">
+      <SubType>Content</SubType>
+      <Name>TransactionReversalExecutionDetailExt_Extension</Name>
+      <Link>Classes\TransactionReversalExecutionDetailExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\VendReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>VendReversePostingExt</Name>
+      <Link>Classes\VendReversePostingExt</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
