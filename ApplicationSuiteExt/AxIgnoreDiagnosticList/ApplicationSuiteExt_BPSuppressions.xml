@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IgnoreDiagnostics>
+  <Name>BowerySPSIntegration_BPSuppressions</Name>
+  <Items>
+    <Diagnostic>
+      <DiagnosticType>BestPractices</DiagnosticType>
+      <Severity>Warning</Severity>
+      <Path>dynamics://Class/CustVendExchAdjustment_WExt/Method/recalcFutureRealizedExchAdj</Path>
+      <Moniker>BPCheckParametersModified</Moniker>
+      <Justification>Copied from standard.</Justification>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>BestPractices</DiagnosticType>
+      <Severity>Warning</Severity>
+      <Path>dynamics://Class/CustVendExchAdjustmentPostCust_WExt/Method/postTaxes</Path>
+      <Moniker>BPCheckParametersModified</Moniker>
+      <Justification>Copied from standard.</Justification>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>BestPractices</DiagnosticType>
+      <Severity>Warning</Severity>
+      <Path>dynamics://Class/CustVendExchAdjustment_WExt/Method/postExchAdj</Path>
+      <Moniker>BPCheckParametersModified</Moniker>
+      <Justification>Copied from standard.</Justification>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>BestPractices</DiagnosticType>
+      <Severity>Warning</Severity>
+      <Path>dynamics://Class/CustVendReversePostingExt/Method/taxCashDisc</Path>
+      <Moniker>BPCheckParametersModified</Moniker>
+      <Justification>Copied from standard.</Justification>
+    </Diagnostic>
+    <Diagnostic>
+      <DiagnosticType>BestPractices</DiagnosticType>
+      <Severity>Error</Severity>
+      <Path>dynamics://Class/TransactionReversal_LedgerExt/Method/createGeneralJournal</Path>
+      <Moniker>TableBufferOverwrite</Moniker>
+      <Justification>Copied from standard.</Justification>
+    </Diagnostic>
+  </Items>
+</IgnoreDiagnostics>
+
+

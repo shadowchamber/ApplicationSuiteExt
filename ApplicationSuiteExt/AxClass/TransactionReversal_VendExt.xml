@@ -84,7 +84,7 @@ class TransactionReversal_VendExt extends TransactionReversal_CustVendExt
             vendInvoiceJour.SumLineDisc = -vendInvoiceJour.SumLineDisc;
             vendInvoiceJour.SumMarkup = - vendInvoiceJour.SumMarkup;
             vendInvoiceJour.InternalInvoiceId = vendInvoiceJour.getInternalInvoiceIdFromVendTrans(vendInvoiceJour.InvoiceAmount);
-            vendInvoiceJour.euSalesList = "";
+            vendInvoiceJour.euSalesList = ''; 
 
             vendInvoiceJour.SourceDocumentHeader = 0;
             vendInvoiceJour.SourceDocumentLine = 0;

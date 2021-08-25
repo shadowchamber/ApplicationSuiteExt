@@ -1423,7 +1423,7 @@ public abstract class CustVendReversePostingExt implements SysSaveable
     [Wrappable(true)]
     final protected void populateTransOpenForReversalInsert()
     {
-        this.populateTransOpenForReversal();
+        this.populateTransOpenForReversalInsert(); // MOD: update cause original is obsolete
     }
 
 ]]></Source>
@@ -2693,7 +2693,7 @@ public abstract class CustVendReversePostingExt implements SysSaveable
                         //  Add a blank account value to the conLedgerAccount container.
                         //  This will cause the default cash discount account to be used.
                         //
-                        conLedgerAccount    += "";
+                        conLedgerAccount    += '';
                         //
                         //  Add the assetTrans.AmountMst (cash discount reversal) to the
                         //  contaxBaseAmountCur to offset the portion of the cash discount
@@ -4236,7 +4236,7 @@ public abstract class CustVendReversePostingExt implements SysSaveable
 
         postingLog.setTaxReverseTax(new TaxReverseTaxCustVendSettle_RU(ledgerVoucher.lastVoucher(),
                                                                        ledgerVoucher.lastTransDate(),
-                                                                       ""));
+                                                                       ''));
         postingLog.addAllowedPostingLogType(CustVendTransPostingLogType_RU::VATTaxAgent);
         postingLog.doReverse(true, true);
         reversePostingLogSet = Set::union(reversePostingLogSet, postingLog.getReversePostingLogSet());
@@ -4898,7 +4898,7 @@ public abstract class CustVendReversePostingExt implements SysSaveable
                                 || (custVendTrans.TransType == LedgerTransType::RTax25_BadDebtDebitAmortisation
                                 && custVendTransOffset.TransType == LedgerTransType::RTax25_BadDebtDebitAmortisation))
                             {
-                                error(strFmt("%1 %2 -> %1 %3", "@GLS103349", custVendTrans.Voucher, custVendTransOffset.Voucher));
+                                error(strFmt('%1 %2 -> %1 %3', "@GLS103349", custVendTrans.Voucher, custVendTransOffset.Voucher));
                                 throw error("@GLS102600");
                             }
 
@@ -5177,7 +5177,7 @@ public abstract class CustVendReversePostingExt implements SysSaveable
                 break;
 
             case tableNum(VendTable):
-                custVendReversePosting = new VendReversePostingExt(_common,  _ledgerVoucherGroup);
+                custVendReversePosting = new VendReversePostingExt(_common, _ledgerVoucherGroup);
                 break;
 
             case tableNum(LedgerJournalTrans) :

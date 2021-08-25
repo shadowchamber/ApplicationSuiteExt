@@ -1076,7 +1076,7 @@ class TransactionReversal_LedgerExt extends TransactionReversalExt
             }
         }
 
-        this.validateCanReverse();
+        this.validateReverse(); // MOD: updated cause original method is obsolete
         
         if (canReverse &&
             this.checkLedgerPostingTypeApplicable(
@@ -1163,22 +1163,17 @@ class TransactionReversal_LedgerExt extends TransactionReversalExt
 ]]></Source>
 			</Method>
 			<Method>
-				<Name>validateCanReverse</Name>
+				<Name>validateReverse</Name>
 				<Source><![CDATA[
     /// <summary>
     /// Does validation against the transaction attempting to be reversed, throwing errors as appropriate.
     /// </summary>
-    [SysObsolete('Please use TransactionReversal_Ledger.validateReverse() instead.', false, 25\06\2020)]
-    protected void validateCanReverse()
-    {
-        this.validateReverse();
-    }
+    //[SysObsolete('Please use TransactionReversal_Ledger.validateReverse() instead.', false, 25\06\2020)]
+    //protected void validateCanReverse()
+    //{
+    //    this.validateReverse();
+    //}
 
-]]></Source>
-			</Method>
-			<Method>
-				<Name>validateReverse</Name>
-				<Source><![CDATA[
     /// <summary>
     /// Performs validation against the transaction attempting to be reversed.
     /// </summary>

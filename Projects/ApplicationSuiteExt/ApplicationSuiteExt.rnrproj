@@ -37,6 +37,16 @@
       <Name>BankDepositCreateCancelJourExt</Name>
       <Link>Classes\BankDepositCreateCancelJourExt</Link>
     </Content>
+    <Content Include="AxClass\BankPaymAdviceContractExt">
+      <SubType>Content</SubType>
+      <Name>BankPaymAdviceContractExt</Name>
+      <Link>Classes\BankPaymAdviceContractExt</Link>
+    </Content>
+    <Content Include="AxClass\BankPaymAdviceUIBuilderExt">
+      <SubType>Content</SubType>
+      <Name>BankPaymAdviceUIBuilderExt</Name>
+      <Link>Classes\BankPaymAdviceUIBuilderExt</Link>
+    </Content>
     <Content Include="AxClass\BankPaymCancelExt">
       <SubType>Content</SubType>
       <Name>BankPaymCancelExt</Name>
