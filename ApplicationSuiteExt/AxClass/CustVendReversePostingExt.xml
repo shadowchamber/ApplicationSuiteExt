@@ -1423,7 +1423,49 @@ public abstract class CustVendReversePostingExt implements SysSaveable
     [Wrappable(true)]
     final protected void populateTransOpenForReversalInsert()
     {
-        this.populateTransOpenForReversalInsert(); // MOD: update cause original is obsolete
+        // MOD: update cause original is obsolete
+        custVendTransOpen.RefRecId = custVendTrans.RecId;
+        custVendTransOpen.AccountNum = custVendTrans.AccountNum;
+
+        //Check if the transaction is of type 'Payment'
+        if (custVendTrans.TransType == LedgerTransType::Payment)
+        {
+            //If transaction is a 'Payment' then set the DueDate same as payment date
+            custVendTransOpen.DueDate = custVendSettlement.TransDate;
+        }
+        else
+        {
+            //If transaction is not of type 'Payment' then retain the DueDate
+            custVendTransOpen.DueDate = custVendSettlement.DueDate;
+        }
+
+        if (custVendTransOpen.TableId == tableNum(CustTransOpen))
+        {
+            custVendTransOpen.LastInterestDate =
+                            (select maxof(LastInterestDate)
+                                from custSettlement
+                                where
+                                    custSettlement.TransRecId == custVendTrans.RecId &&
+                                    custSettlement.TransCompany == custVendTrans.DataAreaId &&
+                                    custSettlement.AccountNum == custVendTrans.AccountNum
+                                ).LastInterestDate;
+        }
+
+        custVendTransOpen.TransDate = custVendTrans.TransDate;
+        custVendTransOpen.CashDiscDate = custVendSettlement.CashDiscDate;
+
+        // <GBR>
+        // Newly created open transaction, all values should be zero
+        if (BrazilParameters::isEnabled())
+        {
+            custVendTransOpen.InterestAmount_BR = 0;
+            custVendTransOpen.FineAmount_BR = 0;
+            custVendTransOpen.FineAmountPaymCur_BR = 0;
+            custVendTransOpen.InterestAmountPaymCur_BR = 0;
+            custVendTransOpen.InterestCode_BR = custVendSettlement.InterestCode_BR;
+            custVendTransOpen.FineCode_BR = custVendSettlement.FineCode_BR;
+        }
+        // </GBR>
     }
 
 ]]></Source>
