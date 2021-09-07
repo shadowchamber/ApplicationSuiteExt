@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <BuildTasksDirectory Condition=" '$(BuildTasksDirectory)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\Dynamics\AX</BuildTasksDirectory>
+    <Model>ApplicationSuiteExt</Model>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>bin</OutputPath>
+    <SchemaVersion>2.0</SchemaVersion>
+    <GenerateCrossReferences>True</GenerateCrossReferences>
+    <RunAppCheckerRules>False</RunAppCheckerRules>
+    <LogAppcheckerDiagsAsErrors>False</LogAppcheckerDiagsAsErrors>
+    <ProjectGuid>{f7fd30a2-92e5-4f86-87c1-f209257fd81c}</ProjectGuid>
+    <Name>ApplicationSuiteExt</Name>
+    <RootNamespace>ApplicationSuiteExt</RootNamespace>
+    <StartupType>Class</StartupType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <DBSyncInBuild>False</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>
+    </Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="AxClass\BankDepositCreateCancelJourExt">
+      <SubType>Content</SubType>
+      <Name>BankDepositCreateCancelJourExt</Name>
+      <Link>Classes\BankDepositCreateCancelJourExt</Link>
+    </Content>
+    <Content Include="AxClass\BankPaymAdviceContractExt">
+      <SubType>Content</SubType>
+      <Name>BankPaymAdviceContractExt</Name>
+      <Link>Classes\BankPaymAdviceContractExt</Link>
+    </Content>
+    <Content Include="AxClass\BankPaymAdviceUIBuilderExt">
+      <SubType>Content</SubType>
+      <Name>BankPaymAdviceUIBuilderExt</Name>
+      <Link>Classes\BankPaymAdviceUIBuilderExt</Link>
+    </Content>
+    <Content Include="AxClass\BankPaymCancelExt">
+      <SubType>Content</SubType>
+      <Name>BankPaymCancelExt</Name>
+      <Link>Classes\BankPaymCancelExt</Link>
+    </Content>
+    <Content Include="AxClass\BankPaymCancelExt_Extension">
+      <SubType>Content</SubType>
+      <Name>BankPaymCancelExt_Extension</Name>
+      <Link>Classes\BankPaymCancelExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\CustReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>CustReversePostingExt</Name>
+      <Link>Classes\CustReversePostingExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostCust_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostCust_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostCust_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostJournal_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostJournal_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostJournal_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostSpec_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostSpec_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostSpec_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPostVend_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPostVend_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPostVend_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustmentPost_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustmentPost_WExt</Name>
+      <Link>Classes\CustVendExchAdjustmentPost_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendExchAdjustment_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendExchAdjustment_WExt</Name>
+      <Link>Classes\CustVendExchAdjustment_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendInstrumentationConstantsExt">
+      <SubType>Content</SubType>
+      <Name>CustVendInstrumentationConstantsExt</Name>
+      <Link>Classes\CustVendInstrumentationConstantsExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendInstrumentationFormatterExt">
+      <SubType>Content</SubType>
+      <Name>CustVendInstrumentationFormatterExt</Name>
+      <Link>Classes\CustVendInstrumentationFormatterExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>CustVendReversePostingExt</Name>
+      <Link>Classes\CustVendReversePostingExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendSettlementInterfaceExt_Extension">
+      <SubType>Content</SubType>
+      <Name>CustVendSettlementInterfaceExt_Extension</Name>
+      <Link>Classes\CustVendSettlementInterfaceExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\CustVendTransReversePostingSelectedDateFeature_WExt">
+      <SubType>Content</SubType>
+      <Name>CustVendTransReversePostingSelectedDateFeature_WExt</Name>
+      <Link>Classes\CustVendTransReversePostingSelectedDateFeature_WExt</Link>
+    </Content>
+    <Content Include="AxClass\CustVendTransSettlement_INTaxExt_Extension">
+      <SubType>Content</SubType>
+      <Name>CustVendTransSettlement_INTaxExt_Extension</Name>
+      <Link>Classes\CustVendTransSettlement_INTaxExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\FeatureExt">
+      <SubType>Content</SubType>
+      <Name>FeatureExt</Name>
+      <Link>Classes\FeatureExt</Link>
+    </Content>
+    <Content Include="AxClass\TaxWithholdCustVendSettlementHelper_INExt">
+      <SubType>Content</SubType>
+      <Name>TaxWithholdCustVendSettlementHelper_INExt</Name>
+      <Link>Classes\TaxWithholdCustVendSettlementHelper_INExt</Link>
+    </Content>
+    <Content Include="AxClass\TransactionReversalExecutionDetailExt_Extension">
+      <SubType>Content</SubType>
+      <Name>TransactionReversalExecutionDetailExt_Extension</Name>
+      <Link>Classes\TransactionReversalExecutionDetailExt_Extension</Link>
+    </Content>
+    <Content Include="AxClass\VendReversePostingExt">
+      <SubType>Content</SubType>
+      <Name>VendReversePostingExt</Name>
+      <Link>Classes\VendReversePostingExt</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.targets" />
+</Project>

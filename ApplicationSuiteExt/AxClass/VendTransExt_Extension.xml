@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>VendTransExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Extension of vendor transaction reversal
+/// </summary>
+[ExtensionOf(tableStr(VendTrans))]
+public final class VendTransExt_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>checkJournalLineWithVendorOnBothSidesExistsExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Check if there is a journal, offset account and ledger account posted for the vendor account.
+    /// </summary>
+    /// <param name = "_vendTrans">
+    /// Vendor transaction.
+    /// </param>
+    /// <returns>
+    /// true, if transactions exist; otherwise, false.
+    /// </returns>
+    public static boolean checkJournalLineWithVendorOnBothSidesExistsExt(VendTrans _vendTrans)
+    {
+        LedgerJournalTrans ledgerJournalTrans;
+
+        select firstOnly RecId from ledgerJournalTrans
+            where ledgerJournalTrans.AccountType == LedgerJournalACType::Vend
+                && ledgerJournalTrans.OffsetAccountType == LedgerJournalACType::Vend
+                && ledgerJournalTrans.LedgerDimension
+                && ledgerJournalTrans.OffsetLedgerDimension
+                && ledgerJournalTrans.Voucher == _vendTrans.Voucher
+                && ledgerJournalTrans.TransDate == _vendTrans.TransDate;
+
+        return ledgerJournalTrans.RecId != 0;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>doesVendInvoicePoolRecordExistExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Determines if a vendor invoice pool record exists for this <c>VendTrans</c> record.
+    /// </summary>
+    /// <returns>true if a vendor invoice pool record exists for this <c>VendTrans</c> record; otherwise, false.</returns>
+    public boolean doesVendInvoicePoolRecordExistExt()
+    {
+        LedgerJournalTrans ledgerJournalTrans;
+        LedgerJournalTable ledgerJournalTable;
+        boolean doesVendInvoicePoolRecordExist;
+
+        // if there is a Vend Invoice Pool record do not allow reversal
+        select firstOnly RecId from ledgerJournalTrans
+            where ledgerJournalTrans.AccountType == LedgerJournalACType::Vend
+                && ledgerJournalTrans.Approved == NoYes::No
+                && ledgerJournalTrans.VendTransId == this.RecId
+            exists join ledgerJournalTable
+                where ledgerJournalTable.JournalNum == ledgerJournalTrans.JournalNum
+                   && ledgerJournalTable.Posted == NoYes::No
+                   && ledgerJournalTable.JournalType == LedgerJournalType::VendInvoicePool;
+
+        if (ledgerJournalTrans.RecId)
+        {
+            doesVendInvoicePoolRecordExist = true;
+        }
+
+        return doesVendInvoicePoolRecordExist;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isSettledCustTransOnSameVoucherExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Determines if a settled customer transaction exists on the same voucher.
+    /// </summary>
+    /// <returns>true if a settled customer transaction exists for the same voucher; otherwise, false.</returns>
+    public boolean isSettledCustTransOnSameVoucherExt()
+    {
+        CustTrans custTrans;
+        boolean isSettledCustTransOnSameVoucher;
+
+        select firstonly RecId, SettleAmountCur from custTrans
+            where custTrans.Voucher == this.Voucher
+               && custTrans.TransDate == this.TransDate;
+
+        if (custTrans.RecId && (custTrans.SettleAmountCur != 0))
+        {
+            isSettledCustTransOnSameVoucher = true;
+        }
+
+        return isSettledCustTransOnSameVoucher;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isSettlementPendingUnpostedPaymentExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Determines if a settlement is pending unposted payments.
+    /// </summary>
+    /// <returns>true if a settlement is pending unposted payments; otherwise, false.</returns>
+    public boolean isSettlementPendingUnpostedPaymentExt()
+    {
+        boolean isSettlementPendingUnpostedPayment;
+
+        // Check for settlements that are pending on unposted payments.
+        SpecTransManager specTransManager = SpecTransManager::newFromSpec(this);
+        VendTransOpen vendTransOpen = VendTransOpen::findRefId(this.RecId);
+
+        if (specTransManager.existForOtherSpec(vendTransOpen.company(), vendTransOpen.TableId, vendTransOpen.RecId))
+        {
+            isSettlementPendingUnpostedPayment = true;
+        }
+
+        return isSettlementPendingUnpostedPayment;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

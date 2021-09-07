@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CustVendInstrumentationConstantsExt</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// For tracking common constant variables used throughout customer and vendor telemetry.
+/// </summary>
+public final class CustVendInstrumentationConstantsExt
+{
+    // Namespace
+    public const str InstrumentationNamespace = 'CustomerVendor';
+    public const str SettlementNamespace = 'CustVendSettlement';
+
+    // Module names
+    public const str ModuleCustomer = 'Customer';
+    public const str ModuleVendor = 'Vendor';
+
+    // Source name format
+    // Convention: CustVend.[Customer/Vendor].ProcessName. Example: CustVend.Customer.ForeignCurrencyRevaluation
+    public const str CustVendSourceNameFormat = '%1.%2.%3';
+    public const str CustVend = 'CustVend';
+
+    // Shared attributes
+    public const str Exception = 'Exception';
+    public const str UpdateConflict = 'UpdateConflict';
+    public const str Deadlock = 'Deadlock';
+    public const str Action = 'Action';
+    public const str RetryProcess = 'Retry';
+    public const str CustomPropertyRecordCount = 'Count';
+    public const str ClassName = 'ClassName';
+    public const str BatchJobId = 'BatchJobId';
+    public const str Module = 'Module';
+
+    // SpecTrans
+    public const str ActivityNameSpecTransManagerCreation = 'SpecTransManagerCreation';
+    public const str ActivityNameNewFromSpec = 'SpecTransManager.NewFromSpec';
+    public const str ActivityNameSpecTransSetBasedDelete = 'SetBasedDelete';
+
+    public const str SourceNameSpecTransViewerDelete = 'SpecTransViewerDelete';
+
+    public const str CustomPropertyDisableSpecTransManagerCache = 'DisableSpecTransManagerCache';
+    public const str CustomPropertyTurnCacheOffForBatch = 'TurnedSpecTransManagerCacheOffForBatch';
+    public const str CustomPropertyDeleteWithNoRecords = 'DeleteCalledForZeroRecords';
+
+    // Settlement - CustVendSettle
+    public const NumberOfRecords InvoiceThreshold = 500;
+
+    public const str SourceNameSettleTransactions = 'Settlement';
+    public const str SettleAction = 'SettleTransactions';
+
+    public const str OriginatingTable = 'OriginatingTable';
+    public const str InvoiceOrderOfMagnitude = 'InvoiceOrderOfMagnitude';
+    public const str PaymentOrderOfMagnitude = 'PaymentOrderOfMagnitude';
+    public const str NumOfLines = 'NumOfLines';
+
+    public const str SettlementEntryNoSettlementGroup = 'SettlementEntryNoSettlementGroup';
+    public const str SettlementEntrySettlementGroupPlaceholder = 'SettlementGroupPlaceholder';
+    public const str SettlementEntryWasPlaceholderFound = 'WasPlaceholderFound';
+
+    // Settlement - Reversal
+    public const str SourceNameSettleReversal = 'ReverseSettlement';
+    public const str SettleReversalReverseTransactions = 'ReverseTransactions';
+    public const str SettleReversalReverseSettlement = 'PostReversalSettlement';
+    public const str SettleReversalTax1099 = 'ReverseTax1099';
+    public const str SettleReversalTaxWithholdBR = 'UpdateBrazilianTaxWithholding';
+    public const str SettleReversalDebtAmortisationAXL = 'ProcessLocalizationDebtAmortisation';
+
+    // Foreign currency revaluation
+    public const str SourceNameForeignCurrencyRevaluation = 'ForeignCurrencyRevaluation';
+
+    public const str ForeignCurrencyRevaluationGenerate = 'GenerateForeignCurrencyRevaluation';
+    public const str ForeignCurrencyRevaluationRevalueSettledTrans = 'RevalueSettledTrans';
+    public const str ForeignCurrencyRevaluationRevalueOpenTrans = 'RevalueOpenTrans';
+    public const str ForeignCurrencyRevaluationPostLedgerVoucher = 'PostLedgerVoucher';
+
+    // Payment proposal
+    public const str SourceNamePaymentProposalGenerate = 'PaymentProposalGenerate';
+    public const str SourceNamePaymentProposalTransfer = 'PaymentProposalTransfer';
+
+    public const str PaymentProposalJournalRecId = 'PaymentProposalJournalRecId';
+    public const str PaymentProposalGeneratePaymentProposal = 'GeneratePaymentProposal';
+    public const str PaymentProposalRunInteractive = 'RunInteractive';
+    public const str PaymentProposalSearchTransactions = 'SearchTransactions';
+    public const str PaymentProposalRemoveJournalLines = 'RemoveUnwantedJournalLines';
+    public const str PaymentProposalTransferToJournal = 'TransferToJournal';
+    public const str PaymentProposalTransferLinesToJournal = 'TransferLinesToJournal';
+    public const str PaymentProposalTransferLinesUpdateSpecTrans = 'UpdateSpecTrans';
+
+    // Payment generation
+    public const str SourceNamePaymentGeneration = 'PaymentGeneration';
+
+    public const str PaymentGenerationForJournal = 'PaymentGenerationForJournal';
+    public const str PaymentGenerationThroughERExport = 'PaymentGenerationThroughERExport';
+    public const str PaymentGenerationERExportIncludedInPaymentGeneration = 'ERExportIncludedInPaymentGeneration';
+    public const str PaymentGenerationGeneratePaymentLines = 'GeneratePaymentLines';
+
+    // Cash flow forecasting
+    public const str ActivityNameCashFlowNewForDocument = 'newForDocument';
+    public const str ActivityNameCashFlowBudgetLine = 'BudgetLine';
+    public const str ActivityNameCashFlowFreeTextInvoice = 'FreeTextInvoice';
+    public const str ActivityNameCashFlowExternalSource = 'ExternalSource';
+    public const str ActivityNameCashFlowCustomerOpenInvoice = 'CustomerOpen';
+    public const str ActivityNameCashFlowPurchForecast = 'PurchForecast';
+    public const str ActivityNameCashFlowSalesForecast = 'SalesForecast';
+    public const str ActivityNameCashFlowGeneralJournalAccountEntry = 'GeneralJournalAccountEntry';
+    public const str ActivityNameCashFlowProject = 'Project';
+    public const str ActivityNameCashFlowPurchaseOrder = 'PurchaseOrder';
+    public const str ActivityNameCashFlowSalesOrder = 'SalesOrder';
+    public const str ActivityNameCashFlowTaxAuthority = 'TaxOpen';
+    public const str ActivityNameCashFlowVendorOpenInvoice = 'VendorOpen';
+
+    public const str SourceNameCashFlowForecasting = 'CashFlowGenerationForDocument';
+    public const str SourceNameCashFlowCustVendTransOpenLedgerCovType = identifierStr(CustVendTransOpenLedgerCovType);
+
+    public const str CashFlowCalculateCashFlowForecast = 'CalculateCashFlowForecast';
+
+    public const str CashFlowProcessFinalTask = 'ProcessFinalTask';
+    public const str CustomPropertyCashFlowAllNew = 'AllNew';
+    public const str CustomPropertyCashFlowDocument = 'Document';
+
+    public const str CustomPropertyCashFlowCustVendTransRecId = 'CustVendTransRecId';
+    public const str CustomPropertyCashFlowCustVendTransOpenRecId = 'CustVendTransOpenRecId';
+    public const str CustomPropertyCashFlowIsInvoice = 'IsInvoice';
+    public const str CustomPropertyCashFlowHasInvoice = 'HasInvoice';
+    public const str CustomPropertyCashFlowIsCreditNote = 'IsCreditNote';
+    public const str CustomPropertyCashFlowIsBridging = 'IsBridging';
+    public const str CustomPropertyCashFlowIsPayment = 'IsPayment';
+    public const str CustomPropertyCashFlowIsZeroValue = 'IsZeroValue';
+
+    // Autosettlement
+    public const str SourceNameAutosettlement = 'Autosettlement';
+
+    public const str AutosettlementMarkTransactions = 'MarkTransactions';
+    public const str AutosettlementMarkByBillingCode = 'MarkTransactionsByPublicSectorBillingCode';
+    public const str AutosettlementMarkByPriority = 'MarkTransactionsBySettlementPriority';
+    public const str CustomPropertyAutoSettlementContext = 'Context';
+}
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+</AxClass>

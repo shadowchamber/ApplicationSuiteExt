@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>BankPaymCancelExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// CustVendPDCRegister table extension class.
+/// </summary>
+[ExtensionOf(classStr(BankPaymCancelExt))]
+final class BankPaymCancelExt_Extension
+{
+    private VendTrans vendTransToCancel;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>findBankAccountTransByVendTrans</Name>
+				<Source><![CDATA[
+    public BankAccountTrans findBankAccountTransByVendTrans(VendTrans _vendTrans)
+    {
+        BankAccountTrans bankAccountTransLocal;
+        BankChequeTable bankChequeTable;
+
+        select forupdate firstonly bankAccountTransLocal
+           where bankAccountTransLocal.Voucher == _vendTrans.Voucher
+              && bankAccountTransLocal.TransDate == _vendTrans.TransDate
+              && bankAccountTransLocal.AmountMST == -_vendTrans.AmountMST;
+
+        if (bankAccountTransLocal == null)
+        {
+            /* If the bank transaction is not found, it may be because of bridged posting, so
+            that vouchers (and maybe dates) are different on CustTrans and the corresponding
+            BankAccountTrans. If a bank check has been generated, we can still find the bank
+            transaction and cancel the check */
+
+            select forupdate firstonly bankAccountTransLocal
+                join bankChequeTable
+                where bankAccountTransLocal.AccountId == bankChequeTable.AccountID
+                   && bankAccountTransLocal.ChequeNum == bankChequeTable.ChequeNum
+                   && bankAccountTransLocal.AmountCur == -bankChequeTable.AmountCur
+                   && bankChequeTable.Voucher == _vendTrans.Voucher
+                   && bankChequeTable.TransDate == _vendTrans.TransDate
+                   && bankChequeTable.ChequeNum == _vendTrans.PaymReference
+                && bankChequeTable.RecipientType == BankChequeRecipientType::Vend
+                   && bankChequeTable.AmountCur == _vendTrans.AmountCur;
+        }
+
+        return bankAccountTransLocal;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmVendTrans</Name>
+				<Source><![CDATA[
+    public VendTrans parmVendTrans(VendTrans _vendTrans = vendTransToCancel)
+    {
+        vendTransToCancel = _vendTrans;
+        return vendTransToCancel;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

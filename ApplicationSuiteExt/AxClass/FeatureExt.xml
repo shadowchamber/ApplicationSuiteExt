@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>FeatureExt</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public static class FeatureExt
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isFeatureEnabled</Name>
+				<Source><![CDATA[
+    public static boolean isFeatureEnabled(str _name)
+    {
+        FeatureManagementState state;
+
+        select firstonly state
+            where state.Name == _name;
+
+        return state.IsEnabled;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

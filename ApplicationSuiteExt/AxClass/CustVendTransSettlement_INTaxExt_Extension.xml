@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CustVendTransSettlement_INTaxExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// The <c>CustVendTransSettlement_INTax_Extension</c> is the extension of <c>CustVendTransSettlement</c> for processing withholding tax when doing settlement.
+/// </summary>
+[ExtensionOf(classStr(CustVendTransSettlement))]
+public final class CustVendTransSettlement_INTaxExt_Extension
+{
+    internal Map whtReversedVendTransMap;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>insertWHTReverseVendTransMap_INExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Adds the withholding tax reversed trans to map.
+    /// </summary>
+    /// <param name = "_settlementGroupPlaceHolder">The settlement group place holder.</param>
+    /// <param name = "_vendTransRecId">The record id of the vendor transaction.</param>
+    /// <returns>The map of reversed transactions.</returns>
+    public Map insertWHTReverseVendTransMap_INExt(Counter _settlementGroupPlaceHolder, RefRecId _vendTransRecId)
+    {
+        if (whtReversedVendTransMap == null)
+        {
+            whtReversedVendTransMap = new Map(Types::Integer, Types::Int64);
+        }
+        whtReversedVendTransMap.insert(_settlementGroupPlaceHolder, _vendTransRecId);
+
+        return whtReversedVendTransMap;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>updateWHTReversedVendTransSettleGroup_INExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Updates the withholding tax reversed transaction settlement group.
+    /// </summary>
+    /// <param name = "_settlementGroupPlaceHolder">The settlement group place holder.</param>
+    /// <param name = "_settleGroup">The settlement group.</param>
+    public void updateWHTReversedVendTransSettleGroup_INExt(
+        Counter _settlementGroupPlaceHolder,
+        RefRecId _settleGroup)
+    {
+        if (whtReversedVendTransMap && whtReversedVendTransMap.exists(_settlementGroupPlaceHolder))
+        {
+            VendTrans_IN vendTransIN = VendTrans_IN::findByVendTrans(whtReversedVendTransMap.lookup(_settlementGroupPlaceHolder), true);
+            if (vendTransIN)
+            {
+                vendTransIN.WithholdTaxRefSettleGroup = _settleGroup;
+                vendTransIN.update();
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
