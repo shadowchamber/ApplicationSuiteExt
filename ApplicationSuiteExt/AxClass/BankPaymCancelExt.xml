@@ -1547,7 +1547,7 @@ public class BankPaymCancelExt extends RunBase
     /// </summary>
     public void run()
     {
-        if (journalName != "")
+        if (journalName != '')
         {
             // The process will occur through a bank deposit cancellation journal.
             BankDepositCreateCancelJourExt bankDepositCreateCancelJour = BankDepositCreateCancelJourExt::newBankDepositCreateCancelJourExt(this);
@@ -1956,7 +1956,7 @@ public class BankPaymCancelExt extends RunBase
         BankAccountTable bankAccountTable;
         Voucher currentVoucher = this.getCancellationVoucher();
 
-        bankAccountTable = BankAccountTable::find(this.parmAccountId());
+        bankAccountTable = BankAccountTable::find(this.parmAccountId()); 
 
         if (bankAccountTable.BankAccountStatus == BankAccountHoldStatus::InactiveForNewTransactions
             || bankAccountTable.BankAccountStatus == BankAccountHoldStatus::InactiveForAllTransactions)

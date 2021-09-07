@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>BankPaymAdviceReportGeneratorVendPostedExtBWFASVPA_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Extension of BankPaymAdviceReportGeneratorVendPostedExt class
+/// </summary>
+[ExtensionOf(classStr(BankPaymAdviceReportGeneratorVendPostedExt))]
+final internal class BankPaymAdviceReportGeneratorVendPostedExtBWFASVPA_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>fetchVendTransInvoice</Name>
+				<Source><![CDATA[
+    public void fetchVendTransInvoice()
+    {
+        next fetchVendTransInvoice();
+
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateBankPaymAdviceTempPaymentInfo</Name>
+				<Source><![CDATA[
+    protected void populateBankPaymAdviceTempPaymentInfo()
+    {
+        next populateBankPaymAdviceTempPaymentInfo();
+
+        //BankPaymAdviceTmpMapExt bankPaymAdviceMapTmp = this.bankPaymAdviceTmp;
+        //BankPaymAdviceVendTmp bankPaymAdviceVendTemp = bankPaymAdviceMapTmp;
+
+        //bankPaymAdviceVendTemp.PaymentSubTypeBWFASVPA = VendPaymModeTable::find(ledgerJournalTrans.PaymMode).PaymentSubTypeBWR;
+        //bankPaymAdviceVendTemp.BankChequeNum = ledgerJournalTrans.BankChequeNum;
+        //bankPaymAdviceVendTemp.BankPaymLineNumBWR = ledgerJournalTrans.BankPaymLineNumBWR;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
