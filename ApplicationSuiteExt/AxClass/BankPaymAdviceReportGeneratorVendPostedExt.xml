@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>BankPaymAdviceReportGeneratorVendPostedExt</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Generates the report data for the <c>BankPaymAdviceVend</c> report for posted payments.
+/// </summary>
+public class BankPaymAdviceReportGeneratorVendPostedExt extends BankPaymAdviceReportGeneratorVendExt
+{
+    private VendTrans vendTransPayment;
+    private VendSettlement vendSettlementPayment;
+    private VendSettlement vendSettlementInvoice;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>fetchVendTransInvoice</Name>
+				<Source><![CDATA[
+    public void fetchVendTransInvoice()
+    {
+        select firstonly crosscompany vendTransInvoice
+                where vendTransInvoice.RecId == vendSettlementPayment.OffsetRecid
+                    && vendTransInvoice.DataAreaId == vendSettlementPayment.OffsetCompany
+                    && vendTransInvoice.Cancel == NoYes::Yes
+                join vendSettlementInvoice
+                    where vendSettlementInvoice.TransRecId == vendTransInvoice.RecId
+                        && vendSettlementInvoice.CanBeReversed == NoYes::Yes;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>findInvoicesAndCreateData</Name>
+				<Source><![CDATA[
+    protected void findInvoicesAndCreateData()
+    {
+        Voucher voucher;
+
+        if (ledgerJournalTrans.Company != ledgerJournalTrans.DataAreaId)
+        {
+            voucher = this.findIntercompanyRelatedPaymentVoucher();
+        }
+
+        if (voucher == '')
+        {
+            voucher = ledgerJournalTrans.Voucher;
+        }
+
+        while select crosscompany vendTransPayment
+            where vendTransPayment.Voucher == voucher
+                && vendTransPayment.AccountNum == vendTable.AccountNum
+                && vendTransPayment.TransDate == ledgerJournalTrans.TransDate
+                && vendTransPayment.DataAreaId == ledgerJournalTrans.Company
+                && vendTransPayment.Cancel == NoYes::Yes
+            join vendSettlementPayment
+                where vendSettlementPayment.TransRecId == vendTransPayment.RecId
+                    && vendSettlementPayment.CanBeReversed == NoYes::Yes
+        {
+            this.fetchVendTransInvoice(); // MOD: allows extend
+            this.insertBankPaymAdviceTmp();
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>populateBankPaymAdviceTempPaymentInfo</Name>
+				<Source><![CDATA[
+    protected void populateBankPaymAdviceTempPaymentInfo()
+    {
+        bankPaymAdviceTmp.PaymRefLabel = this.getPaymRefLabel();
+        bankPaymAdviceTmp.PaymentReference = this.getPaymRef();
+        bankPaymAdviceTmp.SettledCurrencyCode = this.getPaymentCurrencyCode();
+        bankPaymAdviceTmp.CashDisc = this.getCashDiscAmount();
+        bankPaymAdviceTmp.TransDate = ledgerJournalTrans.TransDate;
+        bankPaymAdviceTmp.Balance01 = vendSettlementPayment.SettleAmountCur;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getCashDiscAmount</Name>
+				<Source><![CDATA[
+    protected Amount getCashDiscAmount()
+    {
+        return this.calculateAmountInPaymentCurrency(vendSettlementInvoice.TransDate, vendTransInvoice.CurrencyCode, vendSettlementInvoice.UtilizedCashDisc);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CustVendSettlementInterfaceExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// CustVendSettlementInterface class extension class.
+/// </summary>
+[ExtensionOf(classStr(CustVendSettlementInterface))]
+final class CustVendSettlementInterfaceExt_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>validateReversalSettlementDateExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Validates that the reversal settlement date is on or after the latest settlement date
+    /// for the given spec table.
+    /// </summary>
+    /// <param name = "_specTable">The spec table.</param>
+    /// <param name = "_reversalSettlementDate">The reversal setttlement date.</param>
+    /// <returns>true if the reversal settlement date is on or after the latest settlement date; otherwise, false.</returns>
+    public boolean validateReversalSettlementDateExt(Common _specTable, TransDate _reversalSettlementDate)
+    {
+        boolean isValid = true;
+
+        TransDate latestSettlementDate = this.findLatestReversalSettlementDateExt(_specTable);
+
+        if (latestSettlementDate > _reversalSettlementDate)
+        {
+            isValid = checkFailed(strFmt("@SYS117111", date2StrUsr(_reversalSettlementDate, DateFlags::FormatAll), date2StrUsr(latestSettlementDate, DateFlags::FormatAll)));
+        }
+
+        return isValid;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>findLatestReversalSettlementDateExt</Name>
+				<Source><![CDATA[
+    public TransDate findLatestReversalSettlementDateExt(Common _specTable)
+    {
+        SpecTrans specTrans;
+
+        CustVendSettlement latestCustVendSettlement = this.settlementBuffer();
+
+        select firstonly crosscompany TransDate from latestCustVendSettlement
+            order by latestCustVendSettlement.TransDate desc
+            exists join specTrans
+                where (specTrans.RefRecId == latestCustVendSettlement.RecId
+                    && specTrans.RefTableId == latestCustVendSettlement.TableId)
+                    && (specTrans.SpecCompany == _specTable.company()
+                    && specTrans.SpecRecId == _specTable.RecId
+                    && specTrans.SpecTableId == _specTable.TableId);
+
+        return latestCustVendSettlement.TransDate;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
