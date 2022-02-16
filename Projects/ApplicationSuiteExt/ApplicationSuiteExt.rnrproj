@@ -142,6 +142,11 @@
       <Name>VendReversePostingExt</Name>
       <Link>Classes\VendReversePostingExt</Link>
     </Content>
+    <Content Include="AxClass\WHSInventTableExt_Extension">
+      <SubType>Content</SubType>
+      <Name>WHSInventTableExt_Extension</Name>
+      <Link>Classes\WHSInventTableExt_Extension</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />

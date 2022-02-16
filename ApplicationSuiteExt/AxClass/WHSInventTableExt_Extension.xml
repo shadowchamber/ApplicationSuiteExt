@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>WHSInventTableExt_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// WHSInventTable class.
+/// </summary>
+[ExtensionOf(tableStr(WHSInventTable))]
+final class WHSInventTableExt_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>shouldCaptureAggregateWeightExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Determines if aggregate weight should be captured for the item.
+    /// </summary>
+    /// <param name = "_itemId">
+    /// The item to determine the inbound weight capture method.
+    /// </param>
+    /// <returns>
+    /// True if aggregate weight should be captured; otherwise False.
+    /// </returns>
+    public static boolean shouldCaptureAggregateWeightExt(ItemId _itemId)
+    {
+        boolean ret;
+        WHSCatchWeightItemHandlingPolicy itemHandlingPolicy = WHSInventTable::catchWeightItemHandlingPolicyExt(_itemId);
+
+        if (itemHandlingPolicy.CatchWeightTagTracking)
+        {
+            ret = itemHandlingPolicy.InboundCatchWeightTagCapturingMethod == WHSInboundCatchWeightTagCapturingMethod::DistributeAverageWeight;
+        }
+        else
+        {
+            ret = itemHandlingPolicy.InboundWeightCapturingMethod == WHSInboundWeightCapturingMethod::PerReceivingEvent;
+        }
+
+        return ret;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>catchWeightItemHandlingPolicyExt</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Fetch the catch weight handling policy for a catch weight item.
+    /// </summary>
+    /// <param name = "_itemId">
+    /// The item to determine the policy
+    /// </param>
+    /// <returns>
+    /// Returns a <c>WHSCatchWeightItemHandlingPolicy</c> buffer.
+    /// </returns>
+    public static WHSCatchWeightItemHandlingPolicy catchWeightItemHandlingPolicyExt(ItemId _itemId)
+    {
+        WHSCatchWeightItemHandlingPolicy itemHandlingPolicy;
+
+        if (PdsGlobal::pdsIsCWItem(_itemId))
+        {
+            WHSCatchWeightItemHandlingPolicyName policyName = WHSInventTable::find(_itemId).CatchWeightItemHandlingPolicyName;
+            itemHandlingPolicy = WHSCatchWeightItemHandlingPolicy::find(policyName);
+        }
+
+        return itemHandlingPolicy;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
